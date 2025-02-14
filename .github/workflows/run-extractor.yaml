@@ -126,12 +126,14 @@ jobs:
           elseif ("${{ runner.os }}" -like "*mac*" -and "${{ runner.arch }}" -like "*x86_64*") {
             $releaseFileName = "extractor-osx-x64.zip"
           }
-
+          echo $releaseFileName
+          echo $executableFileName
+          echo 
           Write-Information "Downloading release..."
           $uri = "https://github.com/Azure/apim/releases/download/${{ env.apim_release_version }}/$releaseFileName"
           $downloadFilePath = Join-Path "${{ runner.temp }}" $releaseFileName
-          Invoke-WebRequest -Uri "$uri" -OutFile "$downloadFilePath"
           echo $downloadFilePath
+          Invoke-WebRequest -Uri "$uri" -OutFile "$downloadFilePath"
 
           Write-Information "Extracting release..."
           $executableFolderPath = Join-Path "${{ runner.temp }}" "extractor"
@@ -140,7 +142,7 @@ jobs:
           echo $executableFolderPath
           echo $executableFilePath
           echo $executableFileName
-          
+
           Write-Information "Setting file permissions..."
           if ("${{ runner.os }}" -like "*linux*")
           {
