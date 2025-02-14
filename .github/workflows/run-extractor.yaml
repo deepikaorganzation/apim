@@ -28,6 +28,9 @@ on:
         - OpenAPIV2Yaml
         - OpenAPIV2Json
 
+permissions:
+  contents: write
+  
 env:
   apim_release_version: v6.0.1.4
 
